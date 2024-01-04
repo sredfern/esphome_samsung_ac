@@ -461,17 +461,20 @@ namespace esphome
 
                 if (debug_mqtt_connected())
                 {
+                    std::string sa_str(packet_.sa.to_string().c_str());
+                    std::string da_str(packet_.da.to_string().c_str());
+
                     if (message.type == MessageSetType::Enum)
                     {
-                        debug_mqtt_publish("samsung_ac/nasa/" + packet_.sa.to_string().c_str() + "/" + packet_.da.to_string().c_str() + "/enum/" + long_to_hex((uint16_t)message.messageNumber), std::to_string(message.value));
+                        debug_mqtt_publish("samsung_ac/nasa/" + sa_str + "/" + da_str + "/enum/" + long_to_hex((uint16_t)message.messageNumber), std::to_string(message.value));
                     }
                     else if (message.type == MessageSetType::Variable)
                     {
-                        debug_mqtt_publish("samsung_ac/nasa/" + packet_.sa.to_string().c_str() + "/" + packet_.da.to_string().c_str() + "/var/" + long_to_hex((uint16_t)message.messageNumber), std::to_string(message.value));
+                        debug_mqtt_publish("samsung_ac/nasa/" + sa_str + "/" + da_str + "/var/" + long_to_hex((uint16_t)message.messageNumber), std::to_string(message.value));
                     }
                     else if (message.type == MessageSetType::LongVariable)
                     {
-                        debug_mqtt_publish("samsung_ac/nasa/" + packet_.sa.to_string().c_str() + "/" + packet_.da.to_string().c_str() + "/var_long/" + long_to_hex((uint16_t)message.messageNumber), std::to_string(message.value));
+                        debug_mqtt_publish("samsung_ac/nasa/" + sa_str + "/" + da_str + "/var_long/" + long_to_hex((uint16_t)message.messageNumber), std::to_string(message.value));
                     }
                 }
 
